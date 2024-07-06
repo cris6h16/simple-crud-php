@@ -48,6 +48,41 @@
     </style>
 </head>
 <body>
+<!--
+if ($ejecutado) {
+    header('Location: index.php?mensaje=' . urlencode('Registro guardado correctamente'));
+} else {
+    header('Location: index.php?error=' . urlencode('Error al guardar el registro'));
+} -->
+<?php
+
+if (isset($_GET['mensaje'])) {
+    $mdl =
+        "
+        <div class='modal fade  text-white' id='modal' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+          <div class='modal-dialog '>
+            <div class='modal-content bg-dark'>
+              <div class='modal-header'>
+                <h5 class='modal-title' id='exampleModalLabel'>MENSAJE</h5>
+                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+              </div>
+              <div class='modal-body text-center'>
+                <p>" . $_GET['mensaje'] . "</p>
+                </div>
+                <div class='modal-footer'>
+                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Cerrar</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    ";
+
+    echo $mdl;
+}
+
+?>
+
+
 <div class="container bg-my-black p-5  mt-5 rounded">
 
     <section class="s1">
@@ -57,7 +92,8 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="cedula" class="form-label">Cédula</label>
-                        <input type="text" class="form-control" id="cedula" name="cedula">
+                        <input type="text" class="form-control" id="cedula" name="cedula"
+                                value="<?php echo isset($_GET['cedula']) ? $_GET['cedula'] : '' ?>" >
                         <?php
                         // isset -> verifica si la variable es Not Null
                         // strpos -> verifica si la cadena contiene la subcadena
@@ -67,8 +103,10 @@
                         ?>
                     </div>
                     <div class="mb-3">
-                        <label for="primerNombre" class="form-label">Primer Nombre</label>
-                        <input type="text" class="form-control" id="primerNombre" name="primerNombre">
+                        <label for="input_primer_nombre" class="form-label">Primer Nombre</label>
+                        <input type="text" class="form-control" id="input_primer_nombre" name="primer_nombre"
+                                value="<?php echo isset($_GET['primer_nombre']) ? $_GET['primer_nombre'] : '' ?>"
+                        >
                         <?php
                         if (isset($_GET['error']) && strpos($_GET['error'], 'primer_nombre_vacio') !== false) {
                             echo '<p class="text-danger">El primer nombre no puede estar vacío</p>';
@@ -76,8 +114,10 @@
                         ?>
                     </div>
                     <div class="mb-3">
-                        <label for="segundoNombre" class="form-label">Segundo Nombre</label>
-                        <input type="text" class="form-control" id="segundoNombre" name="segundoNombre">
+                        <label for="input_segundo_nombre" class="form-label">Segundo Nombre</label>
+                        <input type="text" class="form-control" id="input_segundo_nombre" name="segundo_nombre"
+                                value="<?php echo isset($_GET['segundo_nombre']) ? $_GET['segundo_nombre'] : '' ?>"
+                        >
                         <?php
                         if (isset($_GET['error']) && strpos($_GET['error'], 'segundo_nombre_vacio') !== false) {
                             echo '<p class="text-danger">El segundo nombre no puede estar vacío</p>';
@@ -85,8 +125,10 @@
                         ?>
                     </div>
                     <div class="mb-3">
-                        <label for="primerApellido" class="form-label">Primer Apellido</label>
-                        <input type="text" class="form-control" id="primerApellido" name="primerApellido">
+                        <label for="input_primer_apellido" class="form-label">Primer Apellido</label>
+                        <input type="text" class="form-control" id="input_primer_apellido" name="primer_apellido"
+                                value="<?php echo isset($_GET['primer_apellido']) ? $_GET['primer_apellido'] : '' ?>"
+                        >
                         <?php
                         if (isset($_GET['error']) && strpos($_GET['error'], 'primer_apellido_vacio') !== false) {
                             echo '<p class="text-danger">El primer apellido no puede estar vacío</p>';
@@ -94,8 +136,10 @@
                         ?>
                     </div>
                     <div class="mb-3">
-                        <label for="segundoApellido" class="form-label">Segundo Apellido</label>
-                        <input type="text" class="form-control" id="segundoApellido" name="segundoApellido">
+                        <label for="input_segundo_apellido" class="form-label">Segundo Apellido</label>
+                        <input type="text" class="form-control" id="input_segundo_apellido" name="segundo_apellido"
+                                value="<?php echo isset($_GET['segundo_apellido']) ? $_GET['segundo_apellido'] : '' ?>"
+                        >
                         <?php
                         if (isset($_GET['error']) && strpos($_GET['error'], 'segundo_apellido_vacio') !== false) {
                             echo '<p class="text-danger">El segundo apellido no puede estar vacío</p>';
@@ -107,7 +151,9 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="correo" class="form-label">Correo</label>
-                        <input type="email" class="form-control" id="correo" name="correo">
+                        <input type="email" class="form-control" id="correo" name="correo"
+                                value="<?php echo isset($_GET['correo']) ? $_GET['correo'] : '' ?>"
+                        >
                         <?php
                         if (isset($_GET['error']) && strpos($_GET['error'], 'correo_vacio') !== false) {
                             echo '<p class="text-danger">El correo no puede estar vacío</p>';
@@ -116,7 +162,9 @@
                     </div>
                     <div class="mb-3">
                         <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="tel" class="form-control" id="telefono" name="telefono">
+                        <input type="tel" class="form-control" id="telefono" name="telefono"
+                                value="<?php echo isset($_GET['telefono']) ? $_GET['telefono'] : '' ?>"
+                        >
                         <?php
                         if (isset($_GET['error']) && strpos($_GET['error'], 'telefono_vacio') !== false) {
                             echo '<p class="text-danger">El teléfono no puede estar vacío</p>';
@@ -124,8 +172,10 @@
                         ?>
                     </div>
                     <div class="mb-3">
-                        <label for="nacimiento" class="form-label">Fecha de nacimiento</label>
-                        <input type="date" class="form-control" id="nacimiento" name="nacimiento">
+                        <label for="input_nacimiento" class="form-label">Fecha de nacimiento</label>
+                        <input type="date" class="form-control" id="input_nacimiento" name="fecha_nacimiento"
+                                value="<?php echo isset($_GET['fecha_nacimiento']) ? $_GET['fecha_nacimiento'] : '' ?>"
+                        >
                         <?php
                         if (isset($_GET['error']) && strpos($_GET['error'], 'nacimiento_vacia') !== false) {
                             echo '<p class="text-danger">La fecha de nacimiento no puede estar vacía</p>';
@@ -134,7 +184,9 @@
                     </div>
                     <div class="mb-3">
                         <label for="genero" class="form-label">Género</label>
-                        <select class="form-select" id="genero" name="genero">
+                        <select class="form-select" id="genero" name="genero"
+                                value="<?php echo isset($_GET['genero']) ? $_GET['genero'] : '' ?>"
+                        >
                             <option value="M">Masculino</option>
                             <option value="F">Femenino</option>
                         </select>
@@ -182,7 +234,7 @@
                 <th scope="col">CORREO</th>
                 <th scope="col">FECHA DE NACIMIENTO</th>
             </tr>
-            <!--            --><?PHP //include 'imprimir_filas_usuarios.php'; ?>
+                        <?PHP include 'fracmentos/imprimir_filas_usuarios.php'; ?>
             </thead>
             <tbody>
             <!-- Each row represents a user. The data should be filled dynamically -->
@@ -212,11 +264,11 @@
     }
 
     function datosDePrueba() {
-        document.getElementById('cedula').value = '1550212508';
-        document.getElementById('primerNombre').value = 'Cristian';
-        document.getElementById('segundoNombre').value = 'Manuel';
-        document.getElementById('primerApellido').value = 'Herrera';
-        document.getElementById('segundoApellido').value = 'Guallo';
+        document.getElementById('cedula').value = '1550212742';
+        document.getElementById('input_primer_nombre').value = 'Cristian';
+        document.getElementById('input_segundo_nombre').value = 'Manuel';
+        document.getElementById('input_primer_apellido').value = 'Herrera';
+        document.getElementById('input_segundo_apellido').value = 'Guallo';
         document.getElementById('correo').value = 'cristianmherrera21@gmail.com';
         document.getElementById('telefono').value = '0960279073';
         document.getElementById('genero').value = 'M';
@@ -229,8 +281,17 @@
         const mes = hoy.getMonth() + 1;
         const dia = hoy.getDate();
         const fechaEnString = `${ano}-${mes < 10 ? '0' + mes : mes}-${dia < 10 ? '0' + dia : dia}`;
-        document.getElementById('nacimiento').value = fechaEnString;
+        document.getElementById('input_nacimiento').value = fechaEnString;
     }
+
+
+    // mostrar modal si existe
+    document.addEventListener('DOMContentLoaded', (event) => {
+        if (document.getElementById('modal')) {
+            var myModal = new bootstrap.Modal(document.getElementById('modal'), {});
+            myModal.show();
+        }
+    });
 </script>
 </body>
 </html>

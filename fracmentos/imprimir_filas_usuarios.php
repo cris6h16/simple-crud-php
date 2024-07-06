@@ -1,20 +1,30 @@
-<?PHP
-$conexion = new mysqli('localhost', 'root', '', 'crud_cristian_herrera');
-$sql = "SELECT * FROM persona";
-$resultado = $conexion->query($sql);
-$conexion->close();
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-while ($fila = $resultado->fetch_assoc()) {
-    echo "<tr>";
 
-    echo "<td>" . $fila['id'] . "</td>";
-    echo "<td>" . $fila['cedula'] . "</td>";
-    echo "<td>" . $fila['primer_nombre'] . "</td>";
-    echo "<td>" . $fila['primer_apellido'] . "</td>";
-    echo "<td>" . $fila['correo'] . "</td>";
-    echo "<td>" . $fila['fecha_nacimiento'] . "</td>";
+try {
+    $conexion = new mysqli('localhost', 'root', '', 'crud_cristian_herrera');
 
-    echo "</tr>";
+    $sql = "SELECT id, cedula, primer_nombre, primer_apellido, correo, fecha_nacimiento FROM personas";
+    $resultado = $conexion->query($sql);
+
+    while ($fila = $resultado->fetch_assoc()) {
+        echo "<tr>";
+
+        echo "<td>" . htmlspecialchars($fila['id']) . "</td>";
+        echo "<td>" . htmlspecialchars($fila['cedula']) . "</td>";
+        echo "<td>" . htmlspecialchars($fila['primer_nombre']) . "</td>";
+        echo "<td>" . htmlspecialchars($fila['primer_apellido']) . "</td>";
+        echo "<td>" . htmlspecialchars($fila['correo']) . "</td>";
+        echo "<td>" . htmlspecialchars($fila['fecha_nacimiento']) . "</td>";
+
+        echo "</tr>";
+    }
+} catch (Exception $e) {
+    error_log('Error al ejecutar SQL: ' . $e->getMessage());
+    header('Location: index.php?mensaje=' . urlencode($e->getMessage()));
+} finally {
+    $conexion->close();
 }
-
 ?>
