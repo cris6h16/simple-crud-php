@@ -90,7 +90,7 @@ if (isset($_GET['mensaje'])) {
 
     <section class="s1">
         <h4 class="text-center header-titulo p-5 mb-5 rounded">REGISTRO DE PERSONA</h4>
-        <form action="" method="">
+        <form action="" method="post">
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
@@ -201,8 +201,8 @@ if (isset($_GET['mensaje'])) {
                     </div>
                     <div class="mb-3">
                         <label for="id" class="form-label">ID</label>
-                        <input class="form-control" id="id" type="text"  name="id" readonly
-                               value="<?php echo isset($_GET['id']) ? $_GET['id'] : '' ?>" >
+                        <input class="form-control" id="id" type="text" name="id" readonly
+                               value="<?php echo isset($_GET['id']) ? $_GET['id'] : '' ?>">
                         <?php
                         if (isset($_GET['error']) && strpos($_GET['error'], 'id_vacio') !== false) {
                             echo '<p class="text-danger">El id no puede estar vacío</p>';
@@ -214,16 +214,16 @@ if (isset($_GET['mensaje'])) {
 
 
             <div class="row mt-3">
-                <span class="col-5">
+                <span class="col-4 col-sm-4 col-md-5 col-lg-5">
                     <button type="button" class="btn btn-warning mb-2"
                             onclick="formOperacion('actualizar')">Actualizar</button>
                     <button type="button" class="btn btn-danger mb-2"
                             onclick="formOperacion('eliminar')">Eliminar</button>
                 </span>
-                <span class="col-2 text-center">
+                <span class="col-4 col-sm-4 col-md-2 col-lg-2">
                     <button type="button" class="btn btn-info mb-2 " onclick="datosDePrueba()">Datos de prueba</button>
                 </span>
-                <span class="col-5 text-end">
+                <span class="col-4 col-sm-4 col-md-5 col-lg-5 text-end">
                     <button type="button" class="btn btn-primary mb-2"
                             onclick="formOperacion('registro')">Registrar</button>
                     <button type="button" class="btn btn-secondary mb-2" onclick="limpiarForm()">Limpiar</button>
@@ -242,16 +242,10 @@ if (isset($_GET['mensaje'])) {
         crossorigin="anonymous"></script>
 <script>
     function formOperacion(operacion) {
-        if (operacion === 'eliminar') {
-            document.forms[0].action = 'eliminar.php';
-            document.forms[0].method = 'delete';
-        } else if (operacion === 'registro') {
-            document.forms[0].action = 'guardar.php';
-            document.forms[0].method = 'post';
-        } else {
-            document.forms[0].action = 'actualizar.php';
-            document.forms[0].method = 'post';
-        }
+        if (operacion === 'eliminar') document.forms[0].action = 'eliminar.php';
+        else if (operacion === 'registro') document.forms[0].action = 'guardar.php';
+        else document.forms[0].action = 'actualizar.php';
+
         document.forms[0].submit();
     }
 

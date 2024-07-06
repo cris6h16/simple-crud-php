@@ -61,9 +61,9 @@ try {
     ");
 
 //    s -> string
+
     $stmt->bind_param("sssssssssi", $cedula, $primer_nombre, $segundo_nombre, $primer_apellido,
         $segundo_apellido, $correo, $telefono, $fecha_nacimiento, $genero, $id);
-
     $ejecutado = $stmt->execute();
 
     $msg = $ejecutado ? "Actualización exitosa" : 'Error al actualizar el registro';
