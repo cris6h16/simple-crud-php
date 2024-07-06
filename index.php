@@ -44,6 +44,9 @@
             background-color: #1c1c1c;
         }
 
+        .clickable-table:hover {
+            cursor: pointer;
+        }
 
     </style>
 </head>
@@ -93,7 +96,7 @@ if (isset($_GET['mensaje'])) {
                     <div class="mb-3">
                         <label for="cedula" class="form-label">Cédula</label>
                         <input type="text" class="form-control" id="cedula" name="cedula"
-                                value="<?php echo isset($_GET['cedula']) ? $_GET['cedula'] : '' ?>" >
+                               value="<?php echo isset($_GET['cedula']) ? $_GET['cedula'] : '' ?>">
                         <?php
                         // isset -> verifica si la variable es Not Null
                         // strpos -> verifica si la cadena contiene la subcadena
@@ -105,7 +108,7 @@ if (isset($_GET['mensaje'])) {
                     <div class="mb-3">
                         <label for="input_primer_nombre" class="form-label">Primer Nombre</label>
                         <input type="text" class="form-control" id="input_primer_nombre" name="primer_nombre"
-                                value="<?php echo isset($_GET['primer_nombre']) ? $_GET['primer_nombre'] : '' ?>"
+                               value="<?php echo isset($_GET['primer_nombre']) ? $_GET['primer_nombre'] : '' ?>"
                         >
                         <?php
                         if (isset($_GET['error']) && strpos($_GET['error'], 'primer_nombre_vacio') !== false) {
@@ -116,7 +119,7 @@ if (isset($_GET['mensaje'])) {
                     <div class="mb-3">
                         <label for="input_segundo_nombre" class="form-label">Segundo Nombre</label>
                         <input type="text" class="form-control" id="input_segundo_nombre" name="segundo_nombre"
-                                value="<?php echo isset($_GET['segundo_nombre']) ? $_GET['segundo_nombre'] : '' ?>"
+                               value="<?php echo isset($_GET['segundo_nombre']) ? $_GET['segundo_nombre'] : '' ?>"
                         >
                         <?php
                         if (isset($_GET['error']) && strpos($_GET['error'], 'segundo_nombre_vacio') !== false) {
@@ -127,7 +130,7 @@ if (isset($_GET['mensaje'])) {
                     <div class="mb-3">
                         <label for="input_primer_apellido" class="form-label">Primer Apellido</label>
                         <input type="text" class="form-control" id="input_primer_apellido" name="primer_apellido"
-                                value="<?php echo isset($_GET['primer_apellido']) ? $_GET['primer_apellido'] : '' ?>"
+                               value="<?php echo isset($_GET['primer_apellido']) ? $_GET['primer_apellido'] : '' ?>"
                         >
                         <?php
                         if (isset($_GET['error']) && strpos($_GET['error'], 'primer_apellido_vacio') !== false) {
@@ -138,7 +141,7 @@ if (isset($_GET['mensaje'])) {
                     <div class="mb-3">
                         <label for="input_segundo_apellido" class="form-label">Segundo Apellido</label>
                         <input type="text" class="form-control" id="input_segundo_apellido" name="segundo_apellido"
-                                value="<?php echo isset($_GET['segundo_apellido']) ? $_GET['segundo_apellido'] : '' ?>"
+                               value="<?php echo isset($_GET['segundo_apellido']) ? $_GET['segundo_apellido'] : '' ?>"
                         >
                         <?php
                         if (isset($_GET['error']) && strpos($_GET['error'], 'segundo_apellido_vacio') !== false) {
@@ -152,7 +155,7 @@ if (isset($_GET['mensaje'])) {
                     <div class="mb-3">
                         <label for="correo" class="form-label">Correo</label>
                         <input type="email" class="form-control" id="correo" name="correo"
-                                value="<?php echo isset($_GET['correo']) ? $_GET['correo'] : '' ?>"
+                               value="<?php echo isset($_GET['correo']) ? $_GET['correo'] : '' ?>"
                         >
                         <?php
                         if (isset($_GET['error']) && strpos($_GET['error'], 'correo_vacio') !== false) {
@@ -163,7 +166,7 @@ if (isset($_GET['mensaje'])) {
                     <div class="mb-3">
                         <label for="telefono" class="form-label">Teléfono</label>
                         <input type="tel" class="form-control" id="telefono" name="telefono"
-                                value="<?php echo isset($_GET['telefono']) ? $_GET['telefono'] : '' ?>"
+                               value="<?php echo isset($_GET['telefono']) ? $_GET['telefono'] : '' ?>"
                         >
                         <?php
                         if (isset($_GET['error']) && strpos($_GET['error'], 'telefono_vacio') !== false) {
@@ -174,7 +177,7 @@ if (isset($_GET['mensaje'])) {
                     <div class="mb-3">
                         <label for="input_nacimiento" class="form-label">Fecha de nacimiento</label>
                         <input type="date" class="form-control" id="input_nacimiento" name="fecha_nacimiento"
-                                value="<?php echo isset($_GET['fecha_nacimiento']) ? $_GET['fecha_nacimiento'] : '' ?>"
+                               value="<?php echo isset($_GET['fecha_nacimiento']) ? $_GET['fecha_nacimiento'] : '' ?>"
                         >
                         <?php
                         if (isset($_GET['error']) && strpos($_GET['error'], 'nacimiento_vacia') !== false) {
@@ -198,7 +201,13 @@ if (isset($_GET['mensaje'])) {
                     </div>
                     <div class="mb-3">
                         <label for="id" class="form-label">ID</label>
-                        <input class="form-control" id="id" type="text" disabled readonly value="-1">
+                        <input class="form-control" id="id" type="text"  name="id" readonly
+                               value="<?php echo isset($_GET['id']) ? $_GET['id'] : '' ?>" >
+                        <?php
+                        if (isset($_GET['error']) && strpos($_GET['error'], 'id_vacio') !== false) {
+                            echo '<p class="text-danger">El id no puede estar vacío</p>';
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
@@ -217,31 +226,14 @@ if (isset($_GET['mensaje'])) {
                 <span class="col-5 text-end">
                     <button type="button" class="btn btn-primary mb-2"
                             onclick="formOperacion('registro')">Registrar</button>
-                    <button type="reset" class="btn btn-secondary mb-2">Limpiar</button>
+                    <button type="button" class="btn btn-secondary mb-2" onclick="limpiarForm()">Limpiar</button>
                 </span>
             </div>
         </form>
     </section>
 
-    <section class="s2 mt-5 container">
-        <table class="table table-dark table-hover">
-            <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">CEDULA</th>
-                <th scope="col">PRIMER NOMBRE</th>
-                <th scope="col">PRIMER APELLIDO</th>
-                <th scope="col">CORREO</th>
-                <th scope="col">FECHA DE NACIMIENTO</th>
-            </tr>
-                        <?PHP include 'fracmentos/imprimir_filas_usuarios.php'; ?>
-            </thead>
-            <tbody>
-            <!-- Each row represents a user. The data should be filled dynamically -->
-
-            <!-- More rows... -->
-            </tbody>
-        </table>
+    <section class="s2 mt-5 table-responsive">
+        <?PHP include 'fracmentos/tabla.php'; ?>
     </section>
 
 </div>
@@ -258,9 +250,22 @@ if (isset($_GET['mensaje'])) {
             document.forms[0].method = 'post';
         } else {
             document.forms[0].action = 'actualizar.php';
-            document.forms[0].method = 'put';
+            document.forms[0].method = 'post';
         }
         document.forms[0].submit();
+    }
+
+    function limpiarForm() {
+        document.getElementById('cedula').value = '';
+        document.getElementById('input_primer_nombre').value = '';
+        document.getElementById('input_segundo_nombre').value = '';
+        document.getElementById('input_primer_apellido').value = '';
+        document.getElementById('input_segundo_apellido').value = '';
+        document.getElementById('correo').value = '';
+        document.getElementById('telefono').value = '';
+        document.getElementById('genero').value = 'M';
+        document.getElementById('id').value = '-1';
+        document.getElementById('input_nacimiento').value = '';
     }
 
     function datosDePrueba() {
@@ -275,7 +280,6 @@ if (isset($_GET['mensaje'])) {
         document.getElementById('id').value = '-1';
 
 
-        // llenar fecha de nacimiento con la fecha actual
         const hoy = new Date();
         const ano = hoy.getFullYear();
         const mes = hoy.getMonth() + 1;
@@ -291,6 +295,26 @@ if (isset($_GET['mensaje'])) {
             var myModal = new bootstrap.Modal(document.getElementById('modal'), {});
             myModal.show();
         }
+    });
+
+
+    // clickable-table
+    document.addEventListener('DOMContentLoaded', (event) => { // tipo de evento, función a ejecutar
+        const table = document.querySelector('.clickable-table');
+        table.addEventListener('click', (event) => {
+            const fila = event.target.parentElement;
+            const celdas = fila.children;
+            document.getElementById('cedula').value = celdas[1].innerText;
+            document.getElementById('input_primer_nombre').value = celdas[2].innerText;
+            document.getElementById('input_segundo_nombre').value = celdas[3].innerText;
+            document.getElementById('input_primer_apellido').value = celdas[4].innerText;
+            document.getElementById('input_segundo_apellido').value = celdas[5].innerText;
+            document.getElementById('correo').value = celdas[6].innerText;
+            document.getElementById('telefono').value = celdas[7].innerText;
+            document.getElementById('input_nacimiento').value = celdas[8].innerText;
+            document.getElementById('genero').value = celdas[9].innerText;
+            document.getElementById('id').value = celdas[0].innerText;
+        });
     });
 </script>
 </body>
