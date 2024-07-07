@@ -9,5 +9,4 @@ This can be improved a lot, due to my time and my other homeworks I cannot devot
 2. Change the connection data in [guardar.php](guardar.php), [eliminar.php](eliminar.php), and [actualizar.php](actualizar.php).
 3. Open the `index.php` from your server.
 
-# App review
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=ZsjUDg2bo0c" frameborder="0" allowfullscreen></iframe>
+# [App review](https://www.youtube.com/watch?v=ZsjUDg2bo0c)
